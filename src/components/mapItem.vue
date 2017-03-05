@@ -1,11 +1,20 @@
 <template>
-  <a :href="getURL" class="card column" style="min-width:290px" >
+<div> 
+  <a v-if = "testURL" :href="getURL" class="card column" style="min-width:290px" >
     <span class="card-header" v-bind:style="{ backgroundImage: 'url(' + getThumbnail + ')' }">
       <span class="card-title">
         <h3>{{mapInfo.title}}</h3>
       </span>
     </span>
- </a>
+  </a>
+  <router-link :to="getURL" class="card column" style="min-width:290px" v-else>
+    <span class="card-header" v-bind:style="{ backgroundImage: 'url(' + getThumbnail + ')' }">
+      <span class="card-title">
+        <h3>{{mapInfo.title}}</h3>
+      </span>
+    </span>
+  </router-link>
+ </div>
 </template>
 
 <script>
@@ -20,8 +29,12 @@
           if (url) {
             return url;
           } else {
-            return 'http://cityview.baltimorecity.gov/webmap/?webmap=' + this.mapInfo.id;
+            return '/map/' + this.mapInfo.id;
           }
+        },
+        testURL(){
+          if (this.mapInfo.url) return true;
+          else return false;
         }
     }
   }
