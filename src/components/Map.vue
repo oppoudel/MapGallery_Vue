@@ -1,12 +1,5 @@
 <template>
-  <div class="columns">
-    <div class="column is-three-quarters">
-      <div id="viewDiv"></div>
-    </div>
-    <div class="column">
-      <h1>{{$route.params.mapID}}</h1>
-    </div>
-  </div>
+  <div id="viewDiv"></div>
 </template>
 
 <script>
@@ -34,6 +27,21 @@ export default {
           map: webmap,
           container: "viewDiv"
         });
+        view.then(function () {
+          var legend = new Legend({
+            view: view
+          });
+          view.ui.add(legend, "bottom-right");
+        });
+
+        var searchWidget = new Search({
+          view: view
+        });
+
+        view.ui.add(searchWidget, {
+          position: "top-left",
+          index: 0
+        });
       });
     }
     
@@ -44,7 +52,7 @@ export default {
         }
         createMap();
       }, {
-        url: 'https://js.arcgis.com/4.2/'
+        url: 'https://js.arcgis.com/4.3/'
       });
     } else {
       createMap();
@@ -53,9 +61,9 @@ export default {
 }
 </script>
 <style scoped>
-  @import url('https://js.arcgis.com/4.2/esri/css/main.css');
+  @import url('https://js.arcgis.com/4.3/esri/css/main.css');
   #viewDiv {
-    height: 500px;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
   }
 </style>
