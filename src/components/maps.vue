@@ -3,13 +3,13 @@
     <section class="nav has-shadow">
         <div class="container">
           <div class="nav-left">
-            <router-link to="/"><img class="is-hidden-mobile" src="../assets/EPPIcon1.png" alt="Baltimore Logo"></router-link>
-            <router-link to="/"><span class="title is-1"> City of Baltimore: <small> <em>Maps Gallery</em></small> </span> </router-link>
+            <router-link to="/"><img src="../assets/EPPIcon1.png" alt="Baltimore Logo"></router-link>
+            <router-link to="/"><span class="title is-1 is-hidden-mobile"> City of Baltimore: </span><span class="title is-1"><small> <em>Maps Gallery</em></small> </span> </router-link>
           </div>
         </div>
     </section>
     <div class="container" style="margin-top:20px;">
-      <p class="content is-large" style="margin-bottom:0;">City of Baltimore: Maps Gallery is a collection of web maps for the community of City of Baltimore. Find the specific map by searching below.</p>
+      <p class="content is-medium">City of Baltimore: Maps Gallery is a collection of web maps for the community of City of Baltimore. Find the specific map by searching below.</p>
       <div class="columns">
         <div class="column is-half is-offset-one-quarter">
           <p class="control has-icon has-icon-right">

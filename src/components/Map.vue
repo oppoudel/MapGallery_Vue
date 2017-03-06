@@ -66,4 +66,9 @@ export default {
     height: 100vh;
     width: 100vw;
   }
+  @media (max-width: 700px) {
+    .esri-ui-bottom-right{
+      display: none;
+    }
+  }
 </style>

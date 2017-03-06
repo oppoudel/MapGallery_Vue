@@ -35,6 +35,9 @@
   .card {
     width: 100%;
   }
+  .esri-ui-bottom-right{
+    display: none;
+  }
 }
 @media (min-width: 700px) {
   .card {
