@@ -1,6 +1,13 @@
 <template>
   <div>
-    <div class="title">{{mapTitle}}</div>
+    <section class="nav has-shadow">
+        <div class="container">
+          <div class="nav-left">
+            <router-link to="/"><img src="../assets/EPPIcon1.png" alt="Baltimore Logo"></router-link>
+            <router-link to="/"><span class="title is-1"><small>{{mapTitle}}</small> </span> </router-link>
+          </div>
+        </div>
+    </section>
     <div id="viewDiv"></div>
   </div>
 </template>
@@ -14,8 +21,8 @@ export default {
     }
   },
   watch: {
-    '$route' (to, from){
-      console.log(watching);
+    '$route' (){
+      
     }
   },
   methods: {
@@ -58,7 +65,7 @@ export default {
       });
     }
   },
-  created() {    
+  mounted() {    
     if (!esriLoader.isLoaded()) {
       esriLoader.bootstrap((err) => {
         if (err) {
@@ -76,23 +83,21 @@ export default {
 </script>
 <style scoped>
   @import url('https://js.arcgis.com/4.3/esri/css/main.css');
+  img{
+    height: 4rem;
+  }
   .title{
-    font-size: 2em;
-    left: 50%;
-    margin: 0 -8em;
-    position: absolute;
-    text-align: center;
-    /*top: 15px;*/
-    width: 16em;
-    z-index: 5;
-    background: #444;
+    padding-left: 1rem;
+  }
+  .title:hover, .title:focus{
+    color: #00d1b2;
   }
   #viewDiv {
-    height: 100vh;
+    height: calc(100vh - 5rem);
     width: 100vw;
   }
   @media (max-width: 700px) {
-    .esri-ui-bottom-right{
+    .esri-ui-bottom-right, .esri-ui-top-right{
       display: none;
     }
   }
