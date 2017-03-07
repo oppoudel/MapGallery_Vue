@@ -52,15 +52,15 @@
     },
     computed: {
       displayedMaps() {
-        var maps = this.maps;
-        var filteredMaps = maps.filter(this.filterMaps)
+        const maps = this.maps;
+        const filteredMaps = maps.filter(this.filterMaps)
         return filteredMaps;
       }
     },
     methods: {
       filterMaps(map) {
-        var lowercaseName = map.title.toLowerCase();
-        var lowercaseQuery = this.filterQuery.toLowerCase();
+        const lowercaseName = map.title.toLowerCase();
+        const lowercaseQuery = this.filterQuery.toLowerCase();
         return lowercaseName.indexOf(lowercaseQuery) > -1;
       }
     },
@@ -68,7 +68,7 @@
       axios.get('https://www.arcgis.com/sharing/search?q=group%3A%22fe5dcb4c9a594c4796bee717c16ccc76%22&f=json&num=50&sortField=avgRating&sortOrder=desc')
         .then(response => {
           this.maps = response.data.results;
-          console.log(this.maps);
+          //console.log(this.maps);
         })
         .catch(
         error => console.log(error)

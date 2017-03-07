@@ -1,40 +1,53 @@
 <template>
-  <div id="viewDiv"></div>
+  <div>
+    <div class="title">{{mapTitle}}</div>
+    <div id="viewDiv"></div>
+  </div>
 </template>
 
 <script>
 import * as esriLoader from 'esri-loader';
 export default {
+  data() {
+    return {
+      mapTitle: ''
+    }
+  },
   watch: {
     '$route' (to, from){
       console.log(watching);
     }
   },
-  mounted(){
-    const createMap= () => {
+  methods: {
+    createMap() {
       esriLoader.dojoRequire(["esri/views/MapView", 
       "esri/WebMap", 
       "esri/widgets/Legend", 
+      "esri/widgets/LayerList",
       "esri/widgets/Search" 
-      ], (MapView, WebMap, Legend, Search) => {
+      ], (MapView, WebMap, Legend, LayerList, Search) => {
         const webmap = new WebMap({
           portalItem: {
             id: this.$route.params.mapID
           }
         });
-        console.log(webmap);
         const view = new MapView({
           map: webmap,
           container: "viewDiv"
         });
-        view.then(function () {
-          var legend = new Legend({
+        let self = this;
+        view.then (function() {
+          self.mapTitle = webmap.portalItem.title;
+          const legend = new Legend({
             view: view
           });
+          const layerList = new LayerList({
+            view: view
+          });
+          view.ui.add(layerList,"top-right");
           view.ui.add(legend, "bottom-right");
         });
-
-        var searchWidget = new Search({
+        const searchWidget = new Search({
           view: view
         });
 
@@ -44,24 +57,36 @@ export default {
         });
       });
     }
-    
+  },
+  created() {    
     if (!esriLoader.isLoaded()) {
       esriLoader.bootstrap((err) => {
         if (err) {
           console.error(err);
         }
-        createMap();
+        this.createMap();
       }, {
         url: 'https://js.arcgis.com/4.3/'
       });
     } else {
-      createMap();
+      this.createMap();
     }
   }
 }
 </script>
 <style scoped>
   @import url('https://js.arcgis.com/4.3/esri/css/main.css');
+  .title{
+    font-size: 2em;
+    left: 50%;
+    margin: 0 -8em;
+    position: absolute;
+    text-align: center;
+    /*top: 15px;*/
+    width: 16em;
+    z-index: 5;
+    background: #444;
+  }
   #viewDiv {
     height: 100vh;
     width: 100vw;
