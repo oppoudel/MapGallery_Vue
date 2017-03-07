@@ -1,6 +1,6 @@
-# map-gallery
+# Map Gallery
 
-> Map Gallery Using Vue.js
+> Map Gallery Using Vue.js and arcgis javascript api
 
 ## Build Setup
 
