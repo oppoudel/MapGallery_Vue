@@ -4,7 +4,7 @@
         <div class="container">
           <div class="nav-left">
             <router-link to="/"><img src="../assets/EPPIcon1.png" alt="Baltimore Logo"></router-link>
-            <router-link to="/"><span class="title is-1 is-hidden-mobile"> City of Baltimore: </span><span class="title is-1"><small> <em>Maps Gallery</em></small> </span> </router-link>
+            <router-link to="/"><span class="title is-1 is-hidden-mobile">City of Baltimore: </span><span class="title is-1"><small> <em>Maps Gallery</em></small> </span> </router-link>
           </div>
         </div>
     </section>
@@ -39,6 +39,8 @@
 <script>
   import mapItem from './MapItem.vue';
   import axios from 'axios';
+  import config from '../config';
+  console.log(config.id);
 
   export default {
     data() {
@@ -65,7 +67,7 @@
       }
     },
     created() {
-      axios.get('https://www.arcgis.com/sharing/search?q=group%3A%22fe5dcb4c9a594c4796bee717c16ccc76%22&f=json&num=50&sortField=avgRating&sortOrder=desc')
+      axios.get(config.getUrl())
         .then(response => {
           this.maps = response.data.results;
           //console.log(this.maps);
