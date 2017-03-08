@@ -28,10 +28,11 @@ export default {
     createMap() {
       esriLoader.dojoRequire(["esri/views/MapView", 
       "esri/WebMap", 
+      "esri/widgets/Expand",
       "esri/widgets/Legend", 
       "esri/widgets/LayerList",
       "esri/widgets/Search" 
-      ], (MapView, WebMap, Legend, LayerList, Search) => {
+      ], (MapView, WebMap, Expand, Legend, LayerList, Search) => {
         const webmap = new WebMap({
           portalItem: {
             id: this.$route.params.mapID
@@ -43,16 +44,26 @@ export default {
         });
         view.then (() => {
           this.mapTitle = webmap.portalItem.title;
-          if (window.innerWidth > 700){
             const legend = new Legend({
-              view: view
+              view: view,
+              container: document.createElement("div")
             });
             const layerList = new LayerList({
-              view: view
+              view: view,
+              container: document.createElement("div")
             });
-            view.ui.add(layerList,"bottom-left");
-            view.ui.add(legend, "bottom-right");
-          }
+            const legendExpand = new Expand({
+              view: view,
+              content: legend.domNode,
+              expandIconClass: "esri-icon-collection"
+            });
+            const layersExpand = new Expand({
+              view: view,
+              content: layerList.domNode,
+              expandIconClass: "esri-icon-layers"
+            });
+            view.ui.add(layersExpand,"top-right");
+            view.ui.add(legendExpand, "top-right");
         });
         const searchWidget = new Search({
           view: view
@@ -82,7 +93,7 @@ export default {
 }
 </script>
 <style scoped>
-  @import url('https://js.arcgis.com/4.3/esri/css/main.css');
+  @import url('https://js.arcgis.com/4.3/esri/themes/dark/main.css');
   img{
     height: 4rem;
   }
