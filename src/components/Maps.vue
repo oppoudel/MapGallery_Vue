@@ -78,8 +78,11 @@
 
 </script>
 <style scoped>
+  .is-medium {
+    text-align:center;
+  }
   .control{
     padding-left: 1.5%;
+    margin-right: 0.5em;
   }
-  
 </style>

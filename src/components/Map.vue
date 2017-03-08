@@ -3,7 +3,7 @@
     <section class="nav has-shadow">
         <div class="container">
           <div class="nav-left">
-            <router-link to="/"><img src="../assets/EPPIcon1.png" alt="Baltimore Logo"></router-link>
+            <router-link to="/"><img src="../assets/EPPIcon1.png" alt="Baltimore Logo" class="is-hidden-mobile"></router-link>
             <router-link to="/"><span class="title is-1"><small>{{mapTitle}}</small> </span> </router-link>
           </div>
         </div>
@@ -22,10 +22,9 @@ export default {
   },
   watch: {
     '$route' (){
-      
     }
   },
-  methods: {
+  computed: {
     createMap() {
       esriLoader.dojoRequire(["esri/views/MapView", 
       "esri/WebMap", 
@@ -44,14 +43,16 @@ export default {
         });
         view.then (() => {
           this.mapTitle = webmap.portalItem.title;
-          const legend = new Legend({
-            view: view
-          });
-          const layerList = new LayerList({
-            view: view
-          });
-          view.ui.add(layerList,"top-right");
-          view.ui.add(legend, "bottom-right");
+          if (window.innerWidth > 700){
+            const legend = new Legend({
+              view: view
+            });
+            const layerList = new LayerList({
+              view: view
+            });
+            view.ui.add(layerList,"bottom-left");
+            view.ui.add(legend, "bottom-right");
+          }
         });
         const searchWidget = new Search({
           view: view
