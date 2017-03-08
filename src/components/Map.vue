@@ -42,9 +42,8 @@ export default {
           map: webmap,
           container: "viewDiv"
         });
-        let self = this;
-        view.then (function() {
-          self.mapTitle = webmap.portalItem.title;
+        view.then (() => {
+          this.mapTitle = webmap.portalItem.title;
           const legend = new Legend({
             view: view
           });
