@@ -148,3 +148,7 @@ body {
   -webkit-transition-timing-function: linear;
   transition-timing-function: linear;
 }
+.esri-expand__container .esri-widget-button {
+    width: 42px !important;
+    height: 42px !important;
+}
