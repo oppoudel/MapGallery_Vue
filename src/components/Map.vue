@@ -107,7 +107,7 @@ export default {
   }
   #viewDiv {
     height: calc(100vh - 5rem);
-    width: 100vw;
+    width: 100%;
   }
   @media (max-width: 700px) {
     .esri-ui-bottom-right, .esri-ui-top-right{
