@@ -1,20 +1,20 @@
 <template>
-<div> 
-  <a v-if = "testURL" :href="getURL" class="card column" style="min-width:290px" >
-    <span class="card-header" v-bind:style="{ backgroundImage: 'url(' + getThumbnail + ')' }">
-      <span class="card-title">
-        <h3>{{mapInfo.title}}</h3>
+  <div> 
+    <a v-if = "webApplication" :href="getURL" class="card column" style="min-width:290px" >
+      <span class="card-header" :style="{ backgroundImage: 'url(' + getThumbnail + ')' }">
+        <span class="card-title">
+          <h3>{{mapInfo.title}}</h3>
+        </span>
       </span>
-    </span>
-  </a>
-  <router-link :to="getURL" class="card column" style="min-width:290px" v-else>
-    <span class="card-header" v-bind:style="{ backgroundImage: 'url(' + getThumbnail + ')' }">
-      <span class="card-title">
-        <h3>{{mapInfo.title}}</h3>
+    </a>
+    <router-link :to="getURL" class="card column" style="min-width:290px" v-else>
+      <span class="card-header" :style="{ backgroundImage: 'url(' + getThumbnail + ')' }">
+        <span class="card-title">
+          <h3>{{mapInfo.title}}</h3>
+        </span>
       </span>
-    </span>
-  </router-link>
- </div>
+    </router-link>
+  </div>
 </template>
 
 <script>
@@ -32,7 +32,7 @@
             return '/map/' + this.mapInfo.id;
           }
         },
-        testURL(){
+        webApplication(){
           if (this.mapInfo.url) return true;
           else return false;
         }
