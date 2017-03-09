@@ -55,12 +55,14 @@ export default {
             const legendExpand = new Expand({
               view: view,
               content: legend.domNode,
-              expandIconClass: "esri-icon-collection"
+              expandIconClass: "esri-icon-collection",
+              expandTooltip: "Legend"
             });
             const layersExpand = new Expand({
               view: view,
               content: layerList.domNode,
-              expandIconClass: "esri-icon-layers"
+              expandIconClass: "esri-icon-layer-list",
+              expandTooltip: "Layers"
             });
             view.ui.add(layersExpand,"top-right");
             view.ui.add(legendExpand, "top-right");
@@ -93,7 +95,7 @@ export default {
 }
 </script>
 <style scoped>
-  @import url('https://js.arcgis.com/4.3/esri/themes/dark/main.css');
+  @import url('https://js.arcgis.com/4.3/esri/themes/light/main.css');
   img{
     height: 4rem;
   }
