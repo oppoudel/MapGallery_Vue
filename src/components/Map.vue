@@ -1,14 +1,14 @@
 <template>
   <div>
-    <section class="nav has-shadow">
+    <section class="nav">
         <div class="container">
           <div class="nav-left">
-            <router-link to="/"><img src="../assets/EPPIcon1.png" alt="Baltimore Logo" class="is-hidden-mobile"></router-link>
-            <router-link to="/"><span class="title is-1"><small>{{mapTitle}}</small> </span> </router-link>
+            <router-link to="/"><img src="../assets/CITY-LOGO.png" alt="Baltimore Logo" class="is-hidden-mobile"></router-link>
+            <router-link to="/"><span class="title is-1 mapTitle"><small>{{mapTitle}}</small> </span> </router-link>
           </div>
         </div>
     </section>
-    <div id="viewDiv"></div>
+    <div id="viewDiv" class="balt-theme"></div>
   </div>
 </template>
 
@@ -94,24 +94,45 @@ export default {
   }
 }
 </script>
-<style scoped>
-  @import url('https://js.arcgis.com/4.3/esri/themes/light/main.css');
-  img{
-    height: 4rem;
-  }
-  .title{
-    padding-left: 1rem;
-  }
-  .title:hover, .title:focus{
-    color: #00d1b2;
+<style>
+  @import url('https://js.arcgis.com/4.3/esri/themes/dark/main.css');
+  .mapTitle:hover, .mapTitle.focus{
+    color: #9f9f9f;
   }
   #viewDiv {
-    height: calc(100vh - 5rem);
+    height: calc(100vh - 7rem);
     width: 100%;
   }
-  @media (max-width: 700px) {
-    .esri-ui-bottom-right, .esri-ui-top-right{
-      display: none;
-    }
+  table th{
+    color: #fff;
+  }
+  .esri-expand__container .esri-widget-button {
+    width: 42px;
+    height: 42px;
+  }
+  form input[type="text"]::-webkit-input-placeholder {
+  color: #fff !important;
+  }
+  .balt-theme .esri-widget,
+  .balt-theme .esri-widget-button,
+  .balt-theme .esri-menu,
+  .balt-theme .esri-popup__main-container,
+  .balt-theme .esri-popup .esri-pointer-direction,
+  .balt-theme .esri-button {
+    background-color: #42484f;
+    color: #fff;
+  }
+  
+  .balt-theme .esri-widget-button:focus,
+  .balt-theme .esri-widget-button:hover,
+  .balt-theme .esri-menu li:focus,
+  .balt-theme .esri-menu li:hover {
+    background-color: #000;
+    color: #fff;
+  }
+    
+  .balt-theme .esri-button:focus,
+  .balt-theme .esri-button:hover {
+    color: #fff;
   }
 </style>
