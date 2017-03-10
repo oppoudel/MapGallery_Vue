@@ -40,7 +40,6 @@
   import mapItem from './MapItem.vue';
   import axios from 'axios';
   import config from '../config';
-  console.log(config.id);
 
   export default {
     data() {
