@@ -25,7 +25,7 @@
           return 'https://arcgis.com/sharing/content/items/'+this.mapInfo.id+'/info/'+this.mapInfo.thumbnail;
       },
         getURL(){
-          var url = this.mapInfo.url;
+          const url = this.mapInfo.url;
           if (url) {
             return url;
           } else {

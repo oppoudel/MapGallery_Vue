@@ -60,9 +60,11 @@
     },
     methods: {
       filterMaps(map) {
+        const strTags = map.tags.join(' ').toLowerCase();
         const lowercaseName = map.title.toLowerCase();
+        const selection = strTags + lowercaseName
         const lowercaseQuery = this.filterQuery.toLowerCase();
-        return lowercaseName.indexOf(lowercaseQuery) > -1;
+        return selection.indexOf(lowercaseQuery) > -1;
       }
     },
     created() {
