@@ -1,12 +1,18 @@
 <template>
   <div>
     <section class="nav">
-        <div class="container">
-          <div class="nav-left">
-            <router-link to="/"><img src="../assets/CITY-LOGO.png" alt="Baltimore Logo" class="is-hidden-mobile"></router-link>
-            <router-link to="/"><span class="title is-1 mapTitle"><small>{{mapTitle}}</small> </span> </router-link>
-          </div>
+      <div class="container">
+        <div class="nav-left">
+          <router-link to="/">
+            <img src="../assets/CITY-LOGO.png" alt="Baltimore Logo" class="is-hidden-mobile">
+          </router-link>
+          <router-link to="/">
+            <span class="title is-1 mapTitle">
+              <small>{{mapTitle}}</small>
+            </span>
+          </router-link>
         </div>
+      </div>
     </section>
     <div id="viewDiv" class="balt-theme"></div>
   </div>
@@ -95,44 +101,50 @@ export default {
 }
 </script>
 <style>
-  @import url('https://js.arcgis.com/4.3/esri/themes/dark/main.css');
-  .mapTitle:hover, .mapTitle.focus{
-    color: #9f9f9f;
-  }
-  #viewDiv {
-    height: calc(100vh - 7rem);
-    width: 100%;
-  }
-  table th{
-    color: #fff;
-  }
-  .esri-expand__container .esri-widget-button {
-    width: 42px;
-    height: 42px;
-  }
-  form input[type="text"]::-webkit-input-placeholder {
+@import url('https://js.arcgis.com/4.3/esri/themes/dark/main.css');
+.mapTitle:hover,
+.mapTitle.focus {
+  color: #9f9f9f;
+}
+
+#viewDiv {
+  height: calc(100vh - 7rem);
+  width: 100%;
+}
+
+table th {
+  color: #fff;
+}
+
+.esri-expand__container .esri-widget-button {
+  width: 42px;
+  height: 42px;
+}
+
+form input[type="text"]::-webkit-input-placeholder {
   color: #fff !important;
-  }
-  .balt-theme .esri-widget,
-  .balt-theme .esri-widget-button,
-  .balt-theme .esri-menu,
-  .balt-theme .esri-popup__main-container,
-  .balt-theme .esri-popup .esri-pointer-direction,
-  .balt-theme .esri-button {
-    background-color: #42484f;
-    color: #fff;
-  }
-  
-  .balt-theme .esri-widget-button:focus,
-  .balt-theme .esri-widget-button:hover,
-  .balt-theme .esri-menu li:focus,
-  .balt-theme .esri-menu li:hover {
-    background-color: #000;
-    color: #fff;
-  }
-    
-  .balt-theme .esri-button:focus,
-  .balt-theme .esri-button:hover {
-    color: #fff;
-  }
+}
+
+.balt-theme .esri-widget,
+.balt-theme .esri-widget-button,
+.balt-theme .esri-menu,
+.balt-theme .esri-popup__main-container,
+.balt-theme .esri-popup .esri-pointer-direction,
+.balt-theme .esri-button {
+  background-color: #42484f;
+  color: #fff;
+}
+
+.balt-theme .esri-widget-button:focus,
+.balt-theme .esri-widget-button:hover,
+.balt-theme .esri-menu li:focus,
+.balt-theme .esri-menu li:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.balt-theme .esri-button:focus,
+.balt-theme .esri-button:hover {
+  color: #fff;
+}
 </style>
