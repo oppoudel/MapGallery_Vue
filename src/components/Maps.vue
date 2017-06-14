@@ -20,14 +20,7 @@
     <div class="container" style="margin-top:20px;">
       <p class="content is-medium">City of Baltimore: Maps Gallery is a collection of web maps for the community of City of Baltimore. Find the specific map by searching below.</p>
       <div class="columns">
-        <div class="column is-half is-offset-one-quarter">
-          <p class="control has-icon has-icon-right">
-            <input type="text" class="input is-large" placeholder="Find a Map" v-model="filterQuery">
-            <span class="icon is-medium">
-              <i class="fa fa-search"></i>
-            </span>
-          </p>
-        </div>
+        <SearchBox v-model="filterQuery" placeholder="Find a Map" />
       </div>
       <div class="cards">
         <app-map-item v-for='map in displayedMaps' :key='map.id' :mapInfo='map'></app-map-item>
@@ -58,46 +51,48 @@
   </div>
 </template>
 <script>
-  import mapItem from './MapItem.vue';
-  import axios from 'axios';
-  import config from '../config';
+import SearchBox from './SearchBox.vue';
+import mapItem from './MapItem.vue';
+import axios from 'axios';
+import config from '../config';
 
-  export default {
-    data() {
-      return {
-        maps: [],
-        filterQuery: ''
-      }
-    },
-    components: {
-      'app-map-item': mapItem
-    },
-    computed: {
-      displayedMaps() {
-        const maps = this.maps;
-        const filteredMaps = maps.filter(this.filterMaps)
-        return filteredMaps;
-      }
-    },
-    methods: {
-      filterMaps(map) {
-        const strTags = map.tags.join(' ').toLowerCase();
-        const lowercaseName = map.title.toLowerCase();
-        const selection = strTags + lowercaseName
-        const lowercaseQuery = this.filterQuery.toLowerCase();
-        return selection.indexOf(lowercaseQuery) > -1;
-      }
-    },
-    created() {
-      axios.get(config.getUrl())
-        .then(response => {
-          this.maps = response.data.results;
-        })
-        .catch(
-        error => console.log(error)
-        );
+export default {
+  data() {
+    return {
+      maps: [],
+      filterQuery: ''
     }
+  },
+  components: {
+    'app-map-item': mapItem,
+    SearchBox
+  },
+  computed: {
+    displayedMaps() {
+      const maps = this.maps;
+      const filteredMaps = maps.filter(this.filterMaps)
+      return filteredMaps;
+    }
+  },
+  methods: {
+    filterMaps(map) {
+      const strTags = map.tags.join(' ').toLowerCase();
+      const lowercaseName = map.title.toLowerCase();
+      const selection = strTags + lowercaseName
+      const lowercaseQuery = this.filterQuery.toLowerCase();
+      return selection.indexOf(lowercaseQuery) > -1;
+    }
+  },
+  created() {
+    axios.get(config.getUrl())
+      .then(response => {
+        this.maps = response.data.results;
+      })
+      .catch(
+      error => console.log(error)
+      );
   }
+}
 </script>
 <style>
 .is-medium {
