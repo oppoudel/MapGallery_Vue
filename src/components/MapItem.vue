@@ -1,6 +1,6 @@
 <template>
-  <div> 
-    <a v-if = "webApplication" :href="getURL" class="card column" style="min-width:290px" >
+  <div>
+    <a v-if="webApplication" :href="getURL" class="card column" style="min-width:290px">
       <span class="card-header" :style="{ backgroundImage: 'url(' + getThumbnail + ')' }">
         <span class="card-title">
           <h3>{{mapInfo.title}}</h3>
@@ -25,7 +25,7 @@
           return 'https://arcgis.com/sharing/content/items/'+this.mapInfo.id+'/info/'+this.mapInfo.thumbnail;
       },
         getURL(){
-          var url = this.mapInfo.url;
+          const url = this.mapInfo.url;
           if (url) {
             return url;
           } else {
