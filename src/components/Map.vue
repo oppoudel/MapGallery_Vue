@@ -19,26 +19,31 @@
 </template>
 
 <script>
-import * as esriLoader from 'esri-loader';
+import { loadModules } from "esri-loader";
 export default {
   data() {
     return {
-      mapTitle: ''
-    }
+      mapTitle: ""
+    };
   },
   watch: {
-    '$route' (){
-    }
+    $route() {}
   },
-  computed: {
+  methods: {
     createMap() {
-      esriLoader.dojoRequire(["esri/views/MapView", 
-      "esri/WebMap", 
-      "esri/widgets/Expand",
-      "esri/widgets/Legend", 
-      "esri/widgets/LayerList",
-      "esri/widgets/Search" 
-      ], (MapView, WebMap, Expand, Legend, LayerList, Search) => {
+      const options = {
+        url: "https://js.arcgis.com/4.7/"
+      };
+      loadModules(
+        [
+          "esri/views/MapView",
+          "esri/WebMap",
+          "esri/widgets/Expand",
+          "esri/widgets/LayerList",
+          "esri/widgets/Search"
+        ],
+        options
+      ).then(([MapView, WebMap, Expand, LayerList, Search]) => {
         const webmap = new WebMap({
           portalItem: {
             id: this.$route.params.mapID
@@ -48,30 +53,31 @@ export default {
           map: webmap,
           container: "viewDiv"
         });
-        view.then (() => {
+        view.constraints = {
+          rotationEnabled: false
+        };
+        view.when(() => {
           this.mapTitle = webmap.portalItem.title;
-            const legend = new Legend({
-              view: view,
-              container: document.createElement("div")
-            });
-            const layerList = new LayerList({
-              view: view,
-              container: document.createElement("div")
-            });
-            const legendExpand = new Expand({
-              view: view,
-              content: legend.domNode,
-              expandIconClass: "esri-icon-collection",
-              expandTooltip: "Legend"
-            });
-            const layersExpand = new Expand({
-              view: view,
-              content: layerList.domNode,
-              expandIconClass: "esri-icon-layer-list",
-              expandTooltip: "Layers"
-            });
-            view.ui.add(layersExpand,"top-right");
-            view.ui.add(legendExpand, "top-right");
+
+          const layerList = new LayerList({
+            view: view,
+            container: document.createElement("div"),
+            listItemCreatedFunction: function(event) {
+              const item = event.item;
+              item.panel = {
+                content: "legend",
+                open: true
+              };
+            }
+          });
+
+          const layersExpand = new Expand({
+            view: view,
+            content: layerList.domNode,
+            expandIconClass: "esri-icon-layer-list",
+            expandTooltip: "Layers"
+          });
+          view.ui.add(layersExpand, "top-right");
         });
         const searchWidget = new Search({
           view: view
@@ -84,24 +90,13 @@ export default {
       });
     }
   },
-  mounted() {    
-    if (!esriLoader.isLoaded()) {
-      esriLoader.bootstrap((err) => {
-        if (err) {
-          console.error(err);
-        }
-        this.createMap();
-      }, {
-        url: 'https://js.arcgis.com/4.3/'
-      });
-    } else {
-      this.createMap();
-    }
+  mounted() {
+    this.createMap();
   }
-}
+};
 </script>
 <style>
-@import url('https://js.arcgis.com/4.3/esri/themes/dark/main.css');
+@import url("https://js.arcgis.com/4.7/esri/themes/dark/main.css");
 .mapTitle:hover,
 .mapTitle.focus {
   color: #9f9f9f;
@@ -123,28 +118,5 @@ table th {
 
 form input[type="text"]::-webkit-input-placeholder {
   color: #fff !important;
-}
-
-.balt-theme .esri-widget,
-.balt-theme .esri-widget-button,
-.balt-theme .esri-menu,
-.balt-theme .esri-popup__main-container,
-.balt-theme .esri-popup .esri-pointer-direction,
-.balt-theme .esri-button {
-  background-color: #42484f;
-  color: #fff;
-}
-
-.balt-theme .esri-widget-button:focus,
-.balt-theme .esri-widget-button:hover,
-.balt-theme .esri-menu li:focus,
-.balt-theme .esri-menu li:hover {
-  background-color: #000;
-  color: #fff;
-}
-
-.balt-theme .esri-button:focus,
-.balt-theme .esri-button:hover {
-  color: #fff;
 }
 </style>

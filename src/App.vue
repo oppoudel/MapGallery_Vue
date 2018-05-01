@@ -3,9 +3,7 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style >
@@ -13,7 +11,7 @@ body {
   background: #f0f0f0;
   font-size: 17px;
   line-height: 1.4;
-  font-family: 'Jaldi', sans-serif;
+  font-family: "Jaldi", sans-serif;
 }
 
 .container {
@@ -32,7 +30,7 @@ body {
 }
 
 a img {
-  height: 6.5rem;
+  height: 6rem;
 }
 
 .title {
