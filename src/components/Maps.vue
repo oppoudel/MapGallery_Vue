@@ -78,7 +78,8 @@ export default {
     filterMaps(map) {
       const strTags = map.tags.join(" ").toLowerCase();
       const lowercaseName = map.title.toLowerCase();
-      const selection = strTags + lowercaseName;
+      const description = map.description ? map.description.toLowerCase() : '';
+      const selection = strTags + lowercaseName + description;
       const lowercaseQuery = this.filterQuery.toLowerCase();
       return selection.indexOf(lowercaseQuery) > -1;
     }
